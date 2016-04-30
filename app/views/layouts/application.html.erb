@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
     <% if content_for?(:title) %>
       <%= yield(:title) %>
@@ -13,10 +14,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% flash.each do |key, message| %>
-    <div><%= message %></div>
-  <% end %>
-<%= yield %>
-
+  <%= render 'shared/navigation' %>
+  <div class="container">
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key %>">
+        <%= message %></div>
+    <% end %>
+    <%= yield %>
+  </div>
 </body>
 </html>

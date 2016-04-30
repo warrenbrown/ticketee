@@ -379,6 +379,7 @@ DEPENDENCIES
   simple_form (~> 3.1.0)
   spring
   spring-commands-rspec
+  sprockets-rails (~> 3.0, >= 3.0.4)
   sqlite3
   terminal-notifier-guard
   turbolinks

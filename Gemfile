@@ -22,7 +22,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+gem 'sprockets-rails', '~> 3.0', '>= 3.0.4', require: 'sprockets/railtie'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails', '~> 4.3'
