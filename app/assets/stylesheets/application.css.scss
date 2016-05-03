@@ -89,3 +89,22 @@ a.delete {
     padding-right: 0.5em;
   }
 }
+
+#attributes {
+  @extend .table;
+  @extend .table-condensed;
+  width: 65%;
+  th {
+    width: 35%;
+  }
+  tr:first-child {
+    td,
+    th {
+      border-top: 0;
+    }
+  }
+  td,
+  th {
+    line-height: 24px !important;
+  }
+}
