@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :archive]
+
   def index
-    @users = User.order(:email)
+    @users = User.excluding_archived.order(:email)
   end
 
   def new
@@ -43,7 +45,21 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def archive
+    if @user == current_user
+      flash[:alert] = "You can not archive yourself!"
+    else
+      @user.archive
+      flash[ :notice ] = 'User has been archived'
+    end
+    redirect_to admin_users_path
+  end
+
   private
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
     params.require(:user).permit(:email, :password, :admin)
   end
