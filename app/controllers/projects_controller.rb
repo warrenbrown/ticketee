@@ -6,6 +6,7 @@ before_action :set_project, only: [ :show, :edit, :update ]
   end
 
   def show
+    authorize @project, :show?
   end
 
   def edit

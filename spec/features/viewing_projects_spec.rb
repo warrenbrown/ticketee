@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 RSpec.feature 'Users can view projects' do
-  scenario 'With project details' do
-    project = FactoryGirl.create(:project, name: 'Sublime Text 3')
+  let(:user) { FactoryGirl.create(:user) }
+  let(:project) { FactoryGirl.create(:project, name: 'Sublime Text 3') }
 
+  before do
+    login_as(user)
+    assign_role!(user, :viewer, project)
+  end
+
+  scenario 'With project details' do
     visit '/'
 
     click_link 'Sublime Text 3'

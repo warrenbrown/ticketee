@@ -3,27 +3,28 @@ require 'rails_helper'
 RSpec.feature 'users can view tickets' do
   before do
     author = FactoryGirl.create(:user)
+    sublime = FactoryGirl.create(:project, name: "Sublime Text 3")
+    assign_role!(author, :viewer, sublime)
+    FactoryGirl.create(:ticket, project: sublime,  author: author, name: "Make it shiny!", description: "Gradients! Starbursts! Oh my!")
 
-    pat = FactoryGirl.create(:project, name: 'Project Pat')
-    FactoryGirl.create(:ticket, project: pat,
-       author: author, name: 'Make it shiny!', description: 'Gradients starburst oh my!!!')
+    ie = FactoryGirl.create(:project, name: "Internet Explorer")
+    assign_role!(author, :viewer, ie)
 
-    ie = FactoryGirl.create(:project, name: 'Internet Explorer')
-    FactoryGirl.create(:ticket, project: ie, name: 'Standard compliance', description: 'Is not a joke')
-
-    visit '/'
+    FactoryGirl.create(:ticket, project: ie, author: author, name: "Standards compliance", description: "Isn't a joke.")
+    login_as(author)
+    visit "/"
   end
 
   scenario 'for a givein project' do
-    click_link 'Project Pat'
+    click_link 'Sublime Text 3'
 
     expect(page).to have_content 'Make it shiny!'
-    expect(page).to_not have_content 'Standard compliance'
+    expect(page).to_not have_content 'Standards compliance'
 
     click_link 'Make it shiny!'
     within("#ticket h2") do
       expect(page).to have_content 'Make it shiny!'
     end
-    expect(page).to have_content 'Gradients starburst oh my!!!'
+    expect(page).to have_content 'Gradients! Starbursts! Oh my!'
   end
 end
