@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  skip_after_action :verify_authorized, :verify_policy_scoped
+  
   before_action :set_user, only: [:show, :edit, :update, :archive]
 
   def index
