@@ -19,6 +19,7 @@
  @import "font-awesome";
  @import "projects";
  @import "admin/application";
+ @import "admin/users";
  @import "responsive";
 
 @media(max-width: 500px) {
@@ -107,5 +108,22 @@ a.delete {
   td,
   th {
     line-height: 24px !important;
+  }
+}
+
+.roles {
+  @extend .table;
+  @extend .form-horizontal;
+  tr:first-child {
+    td,
+    th {
+      border-top: 0;
+    }
+  }
+  label {
+    @extend .control-label;
+  }
+  select {
+    @extend .form-control;
   }
 }

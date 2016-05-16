@@ -6,3 +6,13 @@
       sure you want to archive this user?' }, class: 'delete' %></li>
   </ul>
 </header>
+
+<% if @user.roles.any? %>
+  <ul>
+    <% @user.roles.each do |role| %>
+      <li><%= role.project.name %>: <%= role.role.titleize %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This user has no roles.</p>
+<% end %>
